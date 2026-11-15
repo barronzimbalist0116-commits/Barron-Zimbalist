@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /posts/{id} {
+      allow read: if true;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+    match /comments/{id} {
+      allow read: if true;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+    }
+    // One vote per poll, enforced by the server: existing votes can never change or be removed.
+    match /votes/{uid} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == uid;
+      allow update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.diff(resource.data).changedKeys().size() == 0
+        && request.resource.data.diff(resource.data).removedKeys().size() == 0;
+    }
+    match /{col}/{uid} {
+      allow read: if col in ['likes','profiles'];
+      allow write: if col in ['likes','profiles'] && request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

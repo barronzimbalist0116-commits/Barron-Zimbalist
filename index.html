@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PULSE</title>
+<style>
+:root{--bg:#000;--c1:#121216;--c2:#1c1c23;--t:#f4f4f8;--m:#8a8a98;--p:#8b5cf6;--b:#3b82f6;--g:linear-gradient(135deg,#8b5cf6,#3b82f6);--ln:#26262e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;font-family:-apple-system,"SF Pro Text",Inter,"Segoe UI",Roboto,sans-serif}
+html,body{height:100%;background:var(--bg);color:var(--t);color-scheme:dark}
+body{overflow:hidden}
+#app{max-width:560px;margin:0 auto;height:100%;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--ln)}
+.logo{font-weight:900;font-size:24px;letter-spacing:3px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+#m{flex:1;overflow-y:auto;padding:14px 14px 100px;-webkit-overflow-scrolling:touch}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;background:#0b0b0fe8;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--ln);display:flex;justify-content:space-around;align-items:center;padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px))}
+nav button{background:none;border:0;color:var(--m);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;cursor:pointer;padding:4px 14px;transition:.2s}
+nav button.on{color:var(--t)}nav button.on svg{stroke:var(--p)}
+nav .cr{background:var(--g);border-radius:18px;width:58px;height:44px;justify-content:center;box-shadow:0 4px 22px #8b5cf699;transform:translateY(-8px)}
+nav .cr svg{stroke:#fff!important}nav .cr:active{transform:translateY(-6px) scale(.95)}
+svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cd{background:var(--c1);border:1px solid var(--ln);border-radius:22px;padding:15px;margin-bottom:12px}#m.an .cd{animation:in .35s ease}.pop{position:fixed;font-size:34px;pointer-events:none;z-index:99;animation:pop .9s ease-out forwards}@keyframes pop{0%{opacity:0;transform:translate(-50%,0) scale(.3)}25%{opacity:1;transform:translate(-50%,-24px) scale(1.5)}100%{opacity:0;transform:translate(-50%,-100px) scale(1)}}.ac button.on svg{animation:beat .4s}@keyframes beat{50%{transform:scale(1.35)}}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.row{display:flex;align-items:center;gap:10px}.sp{justify-content:space-between}
+.av{width:40px;height:40px;border-radius:50%;background:var(--c2);display:grid;place-items:center;font-size:21px;border:2px solid var(--p);flex:none;cursor:pointer}
+.av.l{width:80px;height:80px;font-size:40px}
+.nm{font-weight:700;font-size:14px;cursor:pointer}.mu{color:var(--m);font-size:12px}
+.tx{margin:10px 0;font-size:16px;line-height:1.4;white-space:pre-wrap;word-break:break-word}
+.tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--c2);color:var(--b);text-transform:uppercase}
+.op{position:relative;display:flex;justify-content:space-between;width:100%;padding:13px 15px;margin-top:8px;border-radius:15px;background:var(--c2);border:1px solid var(--ln);color:var(--t);font-size:14px;overflow:hidden;cursor:pointer;text-align:left;transition:.2s}
+button.op:hover{border-color:var(--p)}button.op:active{transform:scale(.98)}
+.op i{position:absolute;left:0;top:0;bottom:0;background:var(--g);opacity:.4;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.op.my{border-color:var(--p)}.op span{position:relative}
+.ac{display:flex;gap:20px;margin-top:12px}
+.ac button{background:none;border:0;color:var(--m);display:flex;gap:6px;align-items:center;cursor:pointer;font-size:13px}
+.ac button.on{color:#ff4d7d}.ac button.on svg{fill:#ff4d7d}.ac svg{width:19px;height:19px}
+.btn{background:var(--g);color:#fff;border:0;border-radius:15px;padding:12px 18px;font-weight:700;cursor:pointer;font-size:15px}
+.btn.g{background:var(--c2);color:var(--t)}.btn.s{padding:7px 13px;font-size:12px;border-radius:11px}
+input,textarea{width:100%;background:var(--c2);border:1px solid var(--ln);color:var(--t);border-radius:14px;padding:12px;font-size:16px;margin-top:8px;outline:none}
+input:focus,textarea:focus{border-color:var(--p)}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px;scrollbar-width:none}
+.tabs button{background:var(--c1);border:1px solid var(--ln);color:var(--m);padding:8px 15px;border-radius:99px;font-size:13px;white-space:nowrap;cursor:pointer;transition:.2s}
+.tabs button.on{background:var(--g);color:#fff;border-color:transparent}
+h2{font-size:18px;margin:14px 0 8px}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;margin:14px 0}.st b{display:block;font-size:19px}
+.lv{height:8px;border-radius:9px;background:var(--c2);overflow:hidden}.lv div{height:100%;background:var(--g);transition:width .6s}
+.ov{position:fixed;inset:0;background:#000c;z-index:9;display:flex;align-items:flex-end;justify-content:center}
+.sh{background:var(--c1);width:100%;max-width:560px;max-height:85%;overflow:auto;border-radius:26px 26px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px));animation:in .3s}
+.cm{margin:10px 0;padding-left:10px;border-left:2px solid var(--p)}
+.em{text-align:center;color:var(--m);padding:30px 10px}
+.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;padding:10px 18px;border-radius:99px;z-index:99;font-weight:700;font-size:13px;animation:in .3s}
+</style></head><body>
+<div id="app"><header><div class="logo">PULSE</div><div class="mu" id="st"></div></header><div id="m"></div></div>
+<nav id="nv"></nav><div id="ov"></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const IC={home:'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',search:'M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM21 21l-4.35-4.35',plus:'M12 5v14M5 12h14',user:'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z',heart:'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z',chat:'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',trash:'M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6'};
+const ic=n=>`<svg viewBox="0 0 24 24"><path d="${IC[n]}"/></svg>`;
+const CATS=['All','Fun','Food','Sports','Tech','Life','Music'],AVS=['😎','🦊','🐼','🚀','🔥','👾','🎧','🌈','🦄','🍕','⚡','🐙'];
+const now=Date.now(),H=36e5;
+const SAMPLE=[['Is pineapple on pizza good?',['Yes 🍍','No way'],'Food',5],['Would you rather be rich or famous?',['Rich','Famous','Neither'],'Life',9],['iPhone or Android?',['iPhone','Android'],'Tech',14],['Best way to spend a Saturday?',['Outdoors','Gaming','Sleeping in','Friends'],'Fun',20],['Messi or Ronaldo?',['Messi','Ronaldo'],'Sports',30]].map((s,i)=>({id:'s'+i,type:'poll',text:s[0],opts:s[1],cat:s[2],uid:'pulse',ts:now-s[3]*H}));
+const LK='pulse_v3',MAP={posts:'posts',comments:'cm',votes:'votes',likes:'likes',profiles:'pr'};
+let db=null,me='local',ready=false,S={posts:[],votes:{},likes:{},cm:[],pr:{}},V='home',T='Trending',Q='',cat='All',PV=null,OPN=null,CT='Poll',ops=['',''],EP=false;
+try{const l=JSON.parse(localStorage.getItem(LK));if(l&&l.pr)S=l}catch(e){}
+const P=u=>S.pr[u]||{},nm=u=>u==='pulse'?'PULSE Team':'@'+(P(u).u||'user'+String(u).replace(/\W/g,'').slice(-4)),av=u=>u==='pulse'?'⚡':(P(u).a||'🙂');
+const ago=t=>{const s=(Date.now()-t)/1e3;return s<60?'now':s<3600?Math.floor(s/60)+'m':s<86400?Math.floor(s/3600)+'h':Math.floor(s/86400)+'d'};
+const all=()=>[...SAMPLE,...S.posts];
+const tally=p=>{const t=p.opts.map(()=>0);for(const u in S.votes){const v=(S.votes[u]||{})[p.id];if(v!=null&&t[v]!=null)t[v]++}return t};
+const likesOf=id=>Object.keys(S.likes).filter(u=>(S.likes[u]||{})[id]);
+const cc=id=>S.cm.filter(c=>c.pid===id).length;
+const score=p=>{const t=tally(p).reduce((a,b)=>a+b,0);return(t+2*likesOf(p.id).length+3*cc(p.id)+1)/Math.pow(1+(Date.now()-p.ts)/H/24,1.1)};
+function stats(u){const m=S.posts.filter(p=>p.uid===u),vr=m.reduce((a,p)=>a+tally(p).reduce((x,y)=>x+y,0),0),vc=Object.keys(S.votes[u]||{}).length,lr=m.reduce((a,p)=>a+likesOf(p.id).length,0),pts=m.length*3+vr*2+vc+lr,lvl=Math.floor(Math.sqrt(pts/20))+1;return{m,vr,vc,lr,pts,lvl,cur:(lvl-1)**2*20,nx:lvl*lvl*20}}
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.append(d);setTimeout(()=>d.remove(),2000)}
+async function put(col,id,d){S[MAP[col]][id]=d;render();if(db)await db.doc(col+'/'+id).set(d);else save()}
+async function add(col,d){if(db)await db.collection(col).add(d);else{S[MAP[col]].push({id:'l'+Date.now()+Math.random().toString(36).slice(2,5),...d});save()}render()}
+const save=()=>{try{localStorage.setItem(LK,JSON.stringify(S))}catch(e){}};
+function card(p){const t=tally(p),tot=t.reduce((a,b)=>a+b,0),my=(S.votes[me]||{})[p.id],lk=likesOf(p.id);
+ const body=p.opts?p.opts.map((o,i)=>{const pc=tot?Math.round(t[i]/tot*100):0;return my==null?`<button class="op" data-a="vote" data-i="${p.id}" data-k="${i}"><span>${E(o)}</span></button>`:`<div class="op ${my===i?'my':''}"><i style="width:${pc}%"></i><span>${E(o)}${my===i?' ✓':''}</span><span><b>${pc}%</b></span></div>`}).join('')+`<div class="mu" style="margin-top:8px">${tot} vote${tot==1?'':'s'}${my!=null?' · live results':' · vote to see results'}</div>`:'';
+ return`<div class="cd"><div class="row"><div class="av" data-a="prof" data-i="${p.uid}">${av(p.uid)}</div><div style="flex:1"><div class="nm" data-a="prof" data-i="${p.uid}">${E(nm(p.uid))}</div><div class="mu">${ago(p.ts)} · ${E(p.cat||'')}</div></div><span class="tag">${p.opts?'Poll':p.type}</span></div><div class="tx">${E(p.text)}</div>${body}
+ <div class="ac"><button class="${lk.includes(me)?'on':''}" data-a="like" data-i="${p.id}">${ic('heart')}${lk.length}</button><button data-a="cm" data-i="${p.id}">${ic('chat')}${cc(p.id)}</button><span style="flex:1"></span>${p.uid===me&&!String(p.id).startsWith('s')?`<button data-a="del" data-i="${p.id}">${ic('trash')}</button>`:''}</div></div>`}
+const list=a=>a.length?a.map(card).join(''):'<div class="em">Nothing here yet 🚀</div>';
+const home=()=>`<div class="tabs">${['Trending','Latest'].map(x=>`<button class="${T===x?'on':''}" data-a="tab" data-i="${x}">${x}</button>`).join('')}</div>${list([...all()].sort(T==='Latest'?(a,b)=>b.ts-a.ts:(a,b)=>score(b)-score(a)))}`;
+function xr(){const q=Q.toLowerCase(),f=all().filter(p=>(cat==='All'||p.cat===cat)&&(!q||p.text.toLowerCase().includes(q)||(p.opts||[]).join(' ').toLowerCase().includes(q)));return`<h2>${q||cat!=='All'?'Results':'🔥 Trending polls'}</h2>${list(f.filter(p=>p.opts||q).sort((a,b)=>score(b)-score(a)))}`}
+const explore=()=>`<input id="q" placeholder="Search polls and questions…" value="${E(Q)}"><div class="tabs" style="margin-top:10px">${CATS.map(c=>`<button class="${cat===c?'on':''}" data-a="cat" data-i="${c}">${c}</button>`).join('')}</div><div id="xr">${xr()}</div>`;
+const create=()=>`<div class="tabs">${['Poll','Question','Post'].map(x=>`<button class="${CT===x?'on':''}" data-a="ct" data-i="${x}">${x}</button>`).join('')}</div><div class="cd"><textarea id="tx" rows="4" placeholder="${CT==='Poll'?'Ask the world something…':CT==='Question'?'What do you want to know?':'What\'s on your mind?'}"></textarea>${CT==='Poll'?ops.map((o,i)=>`<input class="po" placeholder="Option ${i+1}" value="${E(o)}">`).join('')+(ops.length<6?'<button class="btn g s" style="margin-top:10px" data-a="addop">+ Add option</button>':''):''}<div class="tabs" style="margin:12px 0 4px">${CATS.slice(1).map(c=>`<button class="${(window.CC||'Fun')===c?'on':''}" data-a="cc" data-i="${c}">${c}</button>`).join('')}</div><button class="btn" style="width:100%;margin-top:6px" data-a="pub">Publish</button></div>`;
+function profile(){const u=PV||me,s=stats(u),p=P(u),own=u===me;return`<div class="cd" style="text-align:center"><div class="av l" style="margin:auto">${av(u)}</div><h2>${E(nm(u))}</h2><div class="mu">${E(p.bio||(u==='pulse'?'Official PULSE polls':'No bio yet'))}</div><div class="st"><div><b>${s.m.length}</b><span class="mu">Posts</span></div><div><b>${s.vr}</b><span class="mu">Votes got</span></div><div><b>${s.vc}</b><span class="mu">Votes cast</span></div><div><b>${s.lr}</b><span class="mu">Likes</span></div></div><div class="row sp mu"><span>Level ${s.lvl}</span><span>${s.pts} pts</span></div><div class="lv"><div style="width:${Math.min(100,(s.pts-s.cur)/(s.nx-s.cur)*100)}%"></div></div>${own?'<button class="btn g s" style="margin-top:14px" data-a="edit">Edit profile</button>':''}</div><h2>Posts & polls</h2>${list((u==='pulse'?SAMPLE:s.m).slice().sort((a,b)=>b.ts-a.ts))}`}
+function render(){const m=$('#m'),sc=m.scrollTop;m.classList.toggle('an',anim);anim=false;m.innerHTML={home,explore,create,profile}[V]();m.scrollTop=sc;
+ $('#nv').innerHTML=[['home','Home','home'],['explore','Explore','search'],['create','','plus'],['profile','Profile','user']].map(x=>`<button class="${V===x[0]?'on':''} ${x[0]==='create'?'cr':''}" data-a="nav" data-i="${x[0]}">${ic(x[2])}${x[1]}</button>`).join('');
+ $('#st').textContent=db?'● live':'● offline mode'}
+function sheet(h,k){$('#ov').innerHTML=h?`<div class="ov" ${k?'':'data-a="close"'}><div class="sh">${h}</div></div>`:''}
+const avPick=sel=>`<div class="tabs" style="margin-top:12px" id="avs">${AVS.map(a=>`<button class="${a===sel?'on':''}" data-a="pav" data-i="${a}">${a}</button>`).join('')}</div>`;
+function onboard(){sheet(`<h2 style="margin-top:0">Welcome to PULSE ⚡</h2><div class="mu">Choose your username and avatar to get started.</div><input id="un" placeholder="Username (3–20 letters or numbers)" maxlength="20" autocapitalize="none" autocomplete="off">${avPick(AVS[0])}<button class="btn" style="width:100%" data-a="join">Let's go</button>`,1)}
+function comments(){const cs=S.cm.filter(c=>c.pid===OPN).sort((a,b)=>a.ts-b.ts);sheet(`<b>Comments</b>${cs.map(c=>`<div class="cm"><div class="mu"><b>${E(nm(c.uid))}</b> · ${ago(c.ts)}</div><div>${E(c.text)}</div></div>`).join('')||'<div class="mu" style="margin:10px 0">No comments yet. Start the conversation!</div>'}<div class="row"><input id="ci" placeholder="Add a comment…"><button class="btn s" style="margin-top:8px" data-a="send">Send</button></div>`)}
+const pop=r=>{const d=document.createElement('div');d.textContent='❤️';d.className='pop';d.style.left=(r.left+r.width/2)+'px';d.style.top=r.top+'px';document.body.append(d);setTimeout(()=>d.remove(),900)};
+const w=async f=>{try{await f()}catch(e){toast('Something went wrong — try again')}};
+const A={
+nav:i=>{V=i;PV=null;anim=true;render()},tab:i=>{T=i;anim=true;render()},cat:i=>{cat=i;anim=true;render()},ct:i=>{CT=i;render()},cc:i=>{window.CC=i;render()},
+prof:i=>{PV=i;V='profile';anim=true;render()},
+vote:(i,e)=>w(async()=>{const cur=S.votes[me]||{};if(cur[i]!=null)return toast('You already voted');await put('votes',me,{...cur,[i]:+e.dataset.k});toast('Vote counted! ⚡')}),
+like:(i,t)=>{const r=t.getBoundingClientRect();w(async()=>{const c={...(S.likes[me]||{})};if(c[i])delete c[i];else{c[i]=Date.now();pop(r)}await put('likes',me,c)})},
+cm:i=>{OPN=i;comments()},close:(i,t,e)=>{if(e&&e.target!==t)return;OPN=null;sheet('')},
+send:()=>w(async()=>{const t=$('#ci').value.trim();if(!t)return;await add('comments',{pid:OPN,uid:me,text:t.slice(0,300),ts:Date.now()});comments()}),
+addop:()=>{const t=$('#tx').value;ops=[...document.querySelectorAll('.po')].map(x=>x.value);ops.push('');render();$('#tx').value=t},
+pub:()=>w(async()=>{const t=$('#tx').value.trim();if(!t)return toast('Write something first');const d={type:CT.toLowerCase(),text:t.slice(0,500),cat:window.CC||'Fun',uid:me,ts:Date.now()};
+ if(CT==='Poll'){const o=[...document.querySelectorAll('.po')].map(x=>x.value.trim()).filter(Boolean);if(o.length<2)return toast('Polls need 2–6 options');d.opts=o}
+ await add('posts',d);ops=['',''];V='home';T='Latest';render();toast('Published! 🎉')}),
+del:i=>{if(!confirm('Delete this post?'))return;w(async()=>{S.posts=S.posts.filter(p=>p.id!==i);if(db)await db.doc('posts/'+i).delete();else save();render()})},
+pav:(i,e)=>{document.querySelectorAll('#avs button').forEach(b=>b.classList.remove('on'));e.classList.add('on')},
+join:()=>w(async()=>{const u=$('#un').value.trim().replace(/[^\w]/g,'').toLowerCase();if(u.length<3)return toast('Username needs 3+ letters or numbers');if(Object.keys(S.pr).some(k=>k!==me&&S.pr[k].u===u))return toast('Username taken');await put('profiles',me,{u,a:document.querySelector('#avs .on').dataset.i,bio:'',t:Date.now()});sheet('');toast('Welcome, @'+u+'!')}),
+edit:()=>{const p=P(me);sheet(`<h2 style="margin-top:0">Edit profile</h2><input id="eb" maxlength="120" value="${E(p.bio)}" placeholder="Bio">${avPick(p.a)}<button class="btn" style="width:100%" data-a="save">Save</button>`)},
+save:()=>w(async()=>{await put('profiles',me,{...P(me),bio:$('#eb').value.slice(0,120),a:document.querySelector('#avs .on')?.dataset.i||P(me).a});sheet('')})
+};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset.i,t,e)});
+document.addEventListener('input',e=>{if(e.target.id==='q'){Q=e.target.value;$('#xr').innerHTML=xr()}});
+let anim=true,rt;const sched=()=>{clearTimeout(rt);rt=setTimeout(()=>{const a=document.activeElement;if(a&&/INPUT|TEXTAREA/.test(a.tagName))return;render();if(OPN&&$('#ci')&&!$('#ci').value)comments()},150)};
+render();
+(async()=>{
+ try{
+  const cfg=window.FIREBASE_CONFIG||{};
+  if(window.firebase&&cfg.apiKey&&!cfg.apiKey.startsWith('YOUR')){
+   firebase.initializeApp(cfg);
+   const cred=await Promise.race([firebase.auth().signInAnonymously(),new Promise((_,r)=>setTimeout(r,6000))]);
+   db=firebase.firestore();me=cred.user.uid;S={posts:[],votes:{},likes:{},cm:[],pr:{}};
+   const map=col=>db.collection(col).onSnapshot(s=>{const k=MAP[col];if(k==='posts'||k==='cm')S[k]=s.docs.map(x=>({id:x.id,...x.data()}));else{const o={};s.docs.forEach(x=>o[x.id]=x.data());S[k]=o}ready=true;sched()},()=>{ready=true;sched()});
+   Object.keys(MAP).forEach(map);setTimeout(()=>{ready=true;render()},1500);render();return}
+ }catch(e){console.warn('Online mode unavailable, using offline mode',e)}
+ ready=true;render();
+})();
+</script></body></html>
